@@ -1,3 +1,6 @@
+// 스케치북 스킨을 기준으로 작성
+
+
 var stickerConfig = {};
 stickerConfig.delayTime = 3000;
 stickerConfig.setTimeout = false;
@@ -70,11 +73,11 @@ function loadStickerList(page, parent_srl, comment_srl){
 
 }
 
-function loadSticker(sticker_srl, target_srl, comment_srl){
+function loadSticker(sticker_srl, parent_srl, comment_srl){
 	if(!sticker_srl){
 		return alert('스티커 값이 없습니다.'), false;
 	}
-	var $target = jQuery(!target_srl && !comment_srl ? '.stk_cmt' : '.stk_cmt_reply');
+	var $target = jQuery(!parent_srl && !comment_srl ? '.stk_cmt' : '.stk_cmt_reply');
 	var already_exist = $target.find('.stk_display>.stk_body .sticker_'+sticker_srl);
 
 	if(already_exist.length){
@@ -88,7 +91,7 @@ function loadSticker(sticker_srl, target_srl, comment_srl){
 			for(i in stickerImage){
 				var image = stickerImage[i];
 				html += '<li>';
-				html += '<a href="javascript:;" onclick="insertSticker('+sticker_srl+', '+image.sticker_file_srl+', '+(target_srl ? target_srl : 'false')+', '+(comment_srl ? comment_srl : 'false')+')" style="background-image:url('+image.url+');" title="'+image.name+'">';
+				html += '<a href="javascript:;" onclick="insertSticker('+sticker_srl+', '+image.sticker_file_srl+', '+(parent_srl ? parent_srl : 'false')+', '+(comment_srl ? comment_srl : 'false')+')" style="background-image:url('+image.url+');" title="'+image.name+'">';
 				html += '</a>';
 				html += '</li>';
 			}
@@ -102,7 +105,7 @@ function loadSticker(sticker_srl, target_srl, comment_srl){
 
 }
 
-function insertSticker(sticker_srl, sticker_file_srl, target_srl, comment_srl){
+function insertSticker(sticker_srl, sticker_file_srl, parent_srl, comment_srl){
 
 	if(stickerConfig.setTimeout !== false){
 		return alert("너무 빠른 시간동안 이모티콘을 등록할 수 없습니다."), false;
@@ -117,7 +120,7 @@ function insertSticker(sticker_srl, sticker_file_srl, target_srl, comment_srl){
 	var mid = form.find('input[name=mid]').val();
 	var document_srl = form.find('input[name=document_srl]').val();
 	var comment_srl = comment_srl || 0;
-	var parent_srl = target_srl || 0;
+	var parent_srl = parent_srl || 0;
 	var content = "{@sticker:"+sticker_srl+"|"+sticker_file_srl+"}";
 
 	jQuery.ajax({
@@ -127,10 +130,10 @@ function insertSticker(sticker_srl, sticker_file_srl, target_srl, comment_srl){
 		url: '/index.php',
 		data: '<?xml version="1.0" encoding="utf-8" ?><methodCall><params><_filter><![CDATA[insert_comment]]></_filter><error_return_url><![CDATA['+window.location.pathname+']]></error_return_url><mid><![CDATA['+mid+']]></mid><document_srl><![CDATA['+document_srl+']]></document_srl>'+(comment_srl ? ('<comment_srl><![CDATA['+comment_srl+']]></comment_srl>') : '')+'<parent_srl><![CDATA['+parent_srl+']]></parent_srl><content><![CDATA['+content+']]></content><use_html><![CDATA[Y]]></use_html><module><![CDATA[board]]></module><act><![CDATA[procBoardInsertComment]]></act></params></methodCall>',
 		beforeSend : function() {
-			initialSetting.insertComment = true;
-			setTimeout(function() {
-				initialSetting.insertComment = false;
-			}, 4000);
+//			initialSetting.insertComment = true;
+//			setTimeout(function() {
+//				initialSetting.insertComment = false;
+//			}, 4000);
 		},
 		success : function(ret_xml) {
 			var parseXML = jQuery.parseXML(ret_xml);
@@ -157,4 +160,3 @@ function insertSticker(sticker_srl, sticker_file_srl, target_srl, comment_srl){
 
 
 }
-
