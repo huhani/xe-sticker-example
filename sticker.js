@@ -1,4 +1,4 @@
-// 스케치북 스킨을 기준으로 작성
+/******* 스케치북 스킨을 기준으로 작성 *******/
 
 
 var stickerConfig = {};
@@ -144,9 +144,10 @@ function insertSticker(sticker_srl, sticker_file_srl, parent_srl, comment_srl){
 			var mid = xml.find('mid').text();
 			var document_srl = xml.find('document_srl').text();
 			var comment_srl = xml.find('comment_srl').text();
-			var comment_page = xml.find('comment_page').text();
+			//var comment_page = xml.find('comment_page').text();
 			if(!parseInt(error)){
-				loadCommentPage(document_srl, comment_page, comment_srl);
+				/******** 스티커 등록 성공 후 실행할 부분********/
+				//loadCommentPage(document_srl, comment_page, comment_srl);
 			} else {
 				alert(message);
 			}
@@ -154,7 +155,7 @@ function insertSticker(sticker_srl, sticker_file_srl, parent_srl, comment_srl){
 		error : function(request, status, error) {
 		},
 		complete : function() {
-			initialSetting.insertComment = false;
+			//initialSetting.insertComment = false;
 		}
 	});
 
