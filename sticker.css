@@ -49,6 +49,8 @@
 }
 
 .stk_cmt .sticker_pack, .stk_cmt_reply .sticker_pack{
+	padding: 0;
+	margin: 0;
 	display: inline-block;
 }
 .sticker_pack>li{
