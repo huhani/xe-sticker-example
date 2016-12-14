@@ -1,6 +1,3 @@
-/******* 스케치북 스킨을 기준으로 작성 *******/
-
-
 var stickerConfig = {};
 stickerConfig.delayTime = 3000;
 stickerConfig.setTimeout = false;
