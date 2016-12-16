@@ -59,6 +59,8 @@
 
 .stk_cmt .sticker_pack, .stk_cmt_reply .sticker_pack{
 	display: inline-block;
+	padding: 0;
+	margin: 0;
 }
 .sticker_pack>li{
 	display: inline;
