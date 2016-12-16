@@ -2,6 +2,12 @@ var stickerConfig = {};
 stickerConfig.delayTime = 3000; // 스티커 댓글 작성 후 다시 스티커를 삽입하기까지 시간 제한 설정. 단위 ms.
 stickerConfig.setTimeout = false;
 
+/*
+ * 댓글 작성시 스티커 토글 : loadStickerList();
+ * 대댓글 작성시 : loadStickerList(undefined, parent_comment_srl);
+ * 댓글 수정시 : loadStickerList(undefined, false, comment_srl);
+*/
+
 function loadStickerList(page, parent_srl, comment_srl){
 	var _page = page;
 	page = page ? page : 1;
